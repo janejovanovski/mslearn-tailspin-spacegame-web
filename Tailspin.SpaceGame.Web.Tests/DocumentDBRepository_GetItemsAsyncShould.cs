@@ -50,5 +50,15 @@ namespace Tests
             // Verify that each score's game region matches the provided game region.
             Assert.That(scores, Is.All.Matches<Score>(score => score.GameRegion == gameRegion));
         }
+
+        [TestCase("Milky Way")]
+        [TestCase("Andromeda")]
+        [TestCase("Pinwheel")]
+        [TestCase("test")]
+        [TestCase("jane")]
+        public void IsNotEmpty(string gameRegion)
+        {   
+            Assert.IsNotEmpty(gameRegion);
+        }
     }
 }
