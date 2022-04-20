@@ -2,7 +2,9 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq.Expressions;
+using System.Security.Policy;
 using System.Threading.Tasks;
+using Microsoft.VisualBasic.CompilerServices;
 using NUnit.Framework;
 using TailSpin.SpaceGame.Web;
 using TailSpin.SpaceGame.Web.Models;
@@ -22,6 +24,33 @@ namespace Tests
             {
                 _scoreRepository = new LocalDocumentDBRepository<Score>(scoresData);
             }
+        }
+
+        [TestCase("Milky Way", @"c:\temp\slika.jpg", new string[]{"a", "b", "c"})]
+        [TestCase("Andromeda", @"slika.", new string[] { "a", "b", "c" })]
+        [TestCase("Pinwheel", @"c:\temp\slika.jpg", new string[] { })]
+        [TestCase("test", @"c:\temp\slika.jpg", new string[] { "a", "b", "c" })]
+        [TestCase("jane", @"c:\temp\slika.jpg", new string[] { "a", "b", "c" })]
+        public void TestProfile(string name, string avatarUrl, string[] attachments)
+        {
+            var profile = new Profile {UserName = name, Achievements = attachments};
+
+            var isValidUrl = false;
+            try
+            {
+                var url = new Url(avatarUrl);
+                profile.AvatarUrl = avatarUrl;
+                isValidUrl = true;
+
+            }
+            catch (Exception e)
+            {
+                
+            }
+
+            Assert.IsNotEmpty(profile.Achievements);
+            Assert.IsNotEmpty(profile.UserName);
+            Assert.IsTrue(isValidUrl);
         }
 
         [TestCase("Milky Way")]
@@ -55,9 +84,9 @@ namespace Tests
         [TestCase("Andromeda")]
         [TestCase("Pinwheel")]
         [TestCase("test")]
-        [TestCase("jane")]        
+        [TestCase("jane")]
         public void IsNotEmpty(string gameRegion)
-        {   
+        {
             Assert.IsNotEmpty(gameRegion);
         }
     }
