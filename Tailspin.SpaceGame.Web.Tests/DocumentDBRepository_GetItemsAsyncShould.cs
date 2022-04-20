@@ -55,7 +55,7 @@ namespace Tests
         [TestCase("Andromeda")]
         [TestCase("Pinwheel")]
         [TestCase("test")]
-        [TestCase("jane")]
+        [TestCase("jane")]        
         public void IsNotEmpty(string gameRegion)
         {   
             Assert.IsNotEmpty(gameRegion);
