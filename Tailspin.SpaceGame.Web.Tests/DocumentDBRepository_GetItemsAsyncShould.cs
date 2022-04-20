@@ -28,7 +28,7 @@ namespace Tests
 
         [TestCase("Milky Way", @"c:\temp\slika.jpg", new string[]{"a", "b", "c"})]
         [TestCase("Andromeda", @"slika.", new string[] { "a", "b", "c" })]
-        [TestCase("Pinwheel", @"c:\temp\slika.jpg", new string[] { })]
+        [TestCase("Pinwheel", @"c:\temp\slika.jpg", new string[] { "a", "b" })]
         [TestCase("test", @"c:\temp\slika.jpg", new string[] { "a", "b", "c" })]
         [TestCase("jane", @"c:\temp\slika.jpg", new string[] { "a", "b", "c" })]
         public void TestProfile(string name, string avatarUrl, string[] attachments)
